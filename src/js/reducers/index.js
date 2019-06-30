@@ -1,4 +1,4 @@
-import { ADD_TRIP } from "../constants/action_types";
+import { CREATE_TRIP, VIEW_TRIP, EDIT_TRIP } from "../constants/action_types";
 
 //reducers produce the state of your application
 
@@ -38,7 +38,7 @@ let tripTestObject = [
 ]
 
 const initialState = {
-  userId: "",
+  //userId: "",
   trips: tripTestObject
 }
 
@@ -53,10 +53,23 @@ function rootReducer(state = initialState, action){
 
   //when the action type matches, the reducer calculates the next state
   //  and returns a new object
-  if (action.type === ADD_TRIP){
+  if (action.type === CREATE_TRIP){
     return Object.assign({}, state, {
       trips: state.trips.concat(action.payload)
     });
+  }else if(action.type === EDIT_TRIP){
+    const updatedItem = action.payload.trip;
+    return {
+      trips: [...state.trips].map(trip => {
+        if(trip.tripId === updatedItem.tripId){
+          return updatedItem;
+        }else{
+          return item;
+        }
+      })
+    }
+  }else if(action.type === VIEW_TRIP){
+    return state;
   }
 
   return state;

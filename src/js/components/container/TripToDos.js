@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux"; 
+import { connect } from "react-redux";
 
 const mapStateToProps = state => {
   return { toDos: state.todos };
@@ -12,6 +12,7 @@ class ConnectedTripToDos extends Component{
   render(){
     return(
       <div>
+        <p>View TripToDos Component</p>
       </div>
     )
   }

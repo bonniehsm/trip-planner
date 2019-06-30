@@ -3,6 +3,8 @@ import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ViewTripDetails from "./ViewTripDetails";
 import TripToDos from "./TripToDos";
+import ViewDashboard from "./ViewDashboard";
+import CreateTrip from "./CreateTrip";
 
 class App extends Component {
 
@@ -13,8 +15,11 @@ class App extends Component {
         <div>
           <h1>App Component</h1>
           <Dashboard/>
-          <Route path="/view" component = {ViewTripDetails}/>
+          <p><Link to="createTrip">Create Trip</Link></p>
+          <Route path="/viewDashboard" component = {ViewDashboard}/>
+          <Route path="/view/:id" component = {ViewTripDetails}/>
           <Route path="/todos" component = {TripToDos}/>
+          <Route path="/createTrip" component = {CreateTrip}/>
         </div>
       </Router>
     );

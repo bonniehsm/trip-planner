@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-class ViewTripDetails extends Component {
+class ViewDashboard extends Component {
   constructor(props){
     super(props);
   }
   render(){
     return(
       <div>
-        <p>View TripDetails Component</p>
+        <h1>View Dashboard Component</h1>
       </div>
     )
   }
 }
 
-export default ViewTripDetails;
+export default ViewDashboard;
