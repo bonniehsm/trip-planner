@@ -21,23 +21,59 @@ class CreateTrip extends Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-    //function that handles updating the state on input change
-    handleChange = (e) => {
+  //function that handles updating the state on input change
+  handleChange = (e) => {
 
-    }
+  }
 
-    handleSubmit = (e) => {
+  handleSubmit = (e) => {
 
-    }
+  }
 
-    //calls parent function to close the form
-    handleCancel = () => this.props.closeForm();
+  //calls parent function to close the form
+  handleCancel = () => this.props.closeForm();
 
 
   render(){
     return(
       <div>
         <h1>Create Trip Component</h1>
+        <form>
+          <div>
+            Trip ID: <input value={this.state.tripId} onChange={this.handleChange} name="tripId" readonly/>
+          </div>
+          <div>
+            Destination: <input value={this.state.destination} onChange={this.handleChange} name="destination"/>
+          </div>
+          <div>
+            Destination Airport Code:
+            <input value={this.state.departureAirportCode} onChange={this.handleChange} name="departureAirportCode"/>
+          </div>
+          <div>
+            Departure DateTime:
+            <input value={this.state.departureDateTime} onChange={this.handleChange} name="departureDateTime"/>
+          </div>
+          <div>
+            Destination Arrival DateTime:
+            <input value={this.state.destinationArrivalDateTime} onChange={this.handleChange} name="destinationArrivalDateTime"/>
+          </div>
+          <div>
+            Return Airport Code:
+            <input value={this.state.returnAirportCode} onChange={this.handleChange} name="returnAirportCode"/>
+          </div>
+          <div>
+            Return DateTime:
+            <input value={this.state.returnDateTime} onChange={this.handleChange} name="returnDateTime"/>
+          </div>
+          <div>
+            Return Arrival DateTime:
+            <input value={this.state.returnArrivalDateTime} onChange={this.handleChange} name="returnArrivalDateTime"/>
+          </div>
+          <div className="formOperations">
+            <span onClick={this.handleSubmit}>Submit</span>
+            <span onClick={this.handleCancel}>Cancel</span>
+          </div>
+        </form>
       </div>
     )
   }
