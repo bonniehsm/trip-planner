@@ -3,6 +3,19 @@ import React, { Component } from 'react';
 class ViewDashboard extends Component {
   constructor(props){
     super(props);
+
+    //OBJECT SHAPE
+    this.state = {
+      tripId: "",
+      destination: "",
+      departureAirportCode: "",
+      departureDateTime: "",
+      destinationArrivalDateTime: "",
+      returnAirportCode: "",
+      returnDateTime: "",
+      returnArrivalDateTime: "",
+    }
+
   }
   render(){
     return(

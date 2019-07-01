@@ -12,7 +12,6 @@ const mapStateToProps = state => {
 };
 
 const ConnectedDashboard = ({trips}) => {
-  //console.log(trips);
   return(
     <div>
       <h1>Trips Dashboard</h1>

@@ -1,6 +1,4 @@
-import { CREATE_TRIP, VIEW_TRIP, EDIT_TRIP } from "../constants/action_types";
-
-//reducers produce the state of your application
+import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
 
 //OBJECT SHAPE
 let trip = {
@@ -45,34 +43,46 @@ const initialState = {
 function rootReducer(state = initialState, action){
   console.log("rootReducer");
   console.log(state);
-  //the only way to change the state is by sending a signal to the store
-  //  i.e. DISPATCHING an ACTION
-
   // the reducer calculates the next state depending on the action type
   // should at least return the initialState when no action type matches
 
   //when the action type matches, the reducer calculates the next state
   //  and returns a new object
-  if (action.type === CREATE_TRIP){
-    return Object.assign({}, state, {
-      trips: state.trips.concat(action.payload)
-    });
-  }else if(action.type === EDIT_TRIP){
-    const updatedItem = action.payload.trip;
-    return {
-      trips: [...state.trips].map(trip => {
-        if(trip.tripId === updatedItem.tripId){
-          return updatedItem;
-        }else{
-          return item;
-        }
-      })
+
+  switch (action.type){
+    case CREATE_TRIP: {
+      return Object.assign({}, state, {
+        trips: state.trips.concat(action.payload)
+      });
     }
-  }else if(action.type === VIEW_TRIP){
-    return state;
+    case EDIT_TRIP: {
+      const updatedItem = action.payload.trip;
+      return {
+        trips: [...state.trips].map(trip => {
+          if(trip.tripId === updatedItem.tripId){
+            return updatedItem;
+          }else{
+            return item;
+          }
+        })
+      }
+    }
+    case VIEW_TRIP: {
+      return state;
+    }
+    case VIEW_ALL_TRIPS:{
+      return state;
+    }
+    case DELETE_TRIP: {
+      const {id} = action.payload;
+      return {
+        //filter method creates a new array with all elements that pass the test implemented by the provided function
+        trips: [...state.trips].filter(trip => trip.id !== id)
+      }
+    }
+    default: return state;
   }
 
-  return state;
 }
 
 export default rootReducer;
