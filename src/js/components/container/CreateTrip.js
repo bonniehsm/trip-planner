@@ -23,7 +23,15 @@ class CreateTrip extends Component {
 
   //function that handles updating the state on input change
   handleChange = (e) => {
-
+    console.log(e);
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    console.log(target);
+    console.log(name);
+    this.setState({
+      [name]: value
+    });
   }
 
   handleSubmit = (e) => {
@@ -35,12 +43,13 @@ class CreateTrip extends Component {
 
 
   render(){
+    console.log(this.state);
     return(
       <div>
         <h1>Create Trip Component</h1>
         <form>
           <div>
-            Trip ID: <input value={this.state.tripId} onChange={this.handleChange} name="tripId" readonly/>
+            Trip ID: <input name="tripId" value={this.state.tripId} onChange={this.handleChange} name="tripId" readOnly/>
           </div>
           <div>
             Destination: <input value={this.state.destination} onChange={this.handleChange} name="destination"/>

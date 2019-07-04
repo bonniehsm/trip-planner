@@ -43,11 +43,6 @@ const initialState = {
 function rootReducer(state = initialState, action){
   console.log("rootReducer");
   console.log(state);
-  // the reducer calculates the next state depending on the action type
-  // should at least return the initialState when no action type matches
-
-  //when the action type matches, the reducer calculates the next state
-  //  and returns a new object
 
   switch (action.type){
     case CREATE_TRIP: {
