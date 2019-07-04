@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { createTrip } from "../../../js/actions";
+import { connect } from "react-redux";
+
+const mapDispatchToProps = { createTrip }
 
 class CreateTrip extends Component {
   constructor(props){
@@ -27,15 +31,17 @@ class CreateTrip extends Component {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    console.log(target);
-    console.log(name);
+    console.log(`Value: ${value}    Name: ${name}`);
     this.setState({
       [name]: value
     });
   }
 
   handleSubmit = (e) => {
-
+    console.log(`handleSubmit function`);
+    e.preventDefault();
+    console.log(this.state);
+    this.props.createTrip(this.state);
   }
 
   //calls parent function to close the form
@@ -49,7 +55,7 @@ class CreateTrip extends Component {
         <h1>Create Trip Component</h1>
         <form>
           <div>
-            Trip ID: <input name="tripId" value={this.state.tripId} onChange={this.handleChange} name="tripId" readOnly/>
+            Trip ID: <input name="tripId" value={this.state.tripId} onChange={this.handleChange} name="tripId"/>
           </div>
           <div>
             Destination: <input value={this.state.destination} onChange={this.handleChange} name="destination"/>
@@ -79,7 +85,7 @@ class CreateTrip extends Component {
             <input value={this.state.returnArrivalDateTime} onChange={this.handleChange} name="returnArrivalDateTime"/>
           </div>
           <div className="formOperations">
-            <span onClick={this.handleSubmit}>Submit</span>
+            <button onClick={this.handleSubmit}>Submit</button>
             <span onClick={this.handleCancel}>Cancel</span>
           </div>
         </form>
@@ -88,4 +94,4 @@ class CreateTrip extends Component {
   }
 }
 
-export default CreateTrip;
+export default connect(null, mapDispatchToProps)(CreateTrip);

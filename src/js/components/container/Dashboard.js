@@ -21,6 +21,8 @@ const ConnectedDashboard = ({trips}) => {
 }
 
 function renderTrips(trip){
+  console.log(`Dashboard component - renderTrips function`);
+  console.log(trip);
   let todayDateTime = new Date();
   let daysLeft = getDaysLeft(trip.departureDateTime, todayDateTime);
   return(

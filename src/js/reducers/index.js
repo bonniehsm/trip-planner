@@ -46,6 +46,8 @@ function rootReducer(state = initialState, action){
 
   switch (action.type){
     case CREATE_TRIP: {
+      console.log(`createTrip reducer activated`);
+      console.log(action.payload);
       return Object.assign({}, state, {
         trips: state.trips.concat(action.payload)
       });
