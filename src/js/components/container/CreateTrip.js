@@ -10,6 +10,7 @@ class CreateTrip extends Component {
 
     //initializing state
     this.state = {
+      //**TBD - Use this component to add AND edit trip?
       tripId: !this.props.tripId ? "" : this.props.tripId,
       destination: !this.props.destination ? "" : this.props.destination,
       departureAirportCode: !this.props.departureAirportCode? "" : this.props.departureAirportCode,

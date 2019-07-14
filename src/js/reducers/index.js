@@ -36,8 +36,8 @@ let tripTestObject = [
 ]
 
 const initialState = {
-  //userId: "",
-  trips: tripTestObject
+  //trips: tripTestObject
+  trips: []
 }
 
 function rootReducer(state = initialState, action){
