@@ -1,4 +1,4 @@
-import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
+import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP_DETAILS, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
 
 //OBJECT SHAPE
 let trip = {
@@ -59,13 +59,16 @@ function rootReducer(state = initialState, action){
           if(trip.tripId === updatedItem.tripId){
             return updatedItem;
           }else{
-            return item;
+            return trip;
           }
         })
       }
     }
-    case VIEW_TRIP: {
-      return state;
+    case VIEW_TRIP_DETAILS: {
+      const {id} = action.payload;
+      return {
+          tripDetailed: [...state.trips].filter(trip => trip.id == id)
+      }
     }
     case VIEW_ALL_TRIPS:{
       return state;

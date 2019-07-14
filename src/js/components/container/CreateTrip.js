@@ -45,7 +45,10 @@ class CreateTrip extends Component {
   }
 
   //calls parent function to close the form
-  handleCancel = () => this.props.closeForm();
+  handleCancel = (e) => {
+    e.preventDefault();
+    this.props.closeForm();
+  }
 
 
   render(){
@@ -86,7 +89,7 @@ class CreateTrip extends Component {
           </div>
           <div className="formOperations">
             <button onClick={this.handleSubmit}>Submit</button>
-            <span onClick={this.handleCancel}>Cancel</span>
+            <button onClick={this.handleCancel}>Cancel</button>
           </div>
         </form>
       </div>

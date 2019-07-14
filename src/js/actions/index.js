@@ -1,4 +1,4 @@
-import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
+import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP_DETAILS, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
 
 //accepts a trip to be created as its payload
 //dispatched when the user wants to create a new trip
@@ -15,9 +15,9 @@ export const editTrip = (trip) => ({
 })
 
 //dispatched when the user wants to view details of a trip
-export const viewTrip = () => ({
-  type: VIEW_TRIP,
-  payload
+export const viewTripDetails = (tripId) => ({
+  type: VIEW_TRIP_DETAILS,
+  payload: {tripId}
 })
 
 //dispatched when the user wants to view all trips
