@@ -16,6 +16,12 @@ Connect: extracting data with mapStateToProps
  1st argument: entire Redux store state
 **/
 const mapStateToProps = state => {
+  console.log(
+    `
+    TripToDos -- mapStateToProps --
+    ${state.toDos}
+    `
+  );
   return { toDos: state.toDos };
 }
 
@@ -41,6 +47,7 @@ function ViewToDosList(props){
 }
 
 function ListItem(props){
+  console.log(`You have a task-- ListItem component rendered`);
   const items = props.items;
   const listItems = items.map((item, index) => {
     return <li key={`todo--item-${index}`}>{ item }</li>
@@ -75,12 +82,18 @@ class ConnectedTripToDos extends Component{
   }
 
   render(){
-    console.log(this.props);
-    console.log(this.state);
+    console.log(
+      `
+      ConnectedTripToDos Component - props:
+      ${this.props.toDos}
+      `
+    );
+
+    //console.log(this.state);
     const testItem = "test item";
     const testList = ["item 1", "item 2", "item 3", "item 4"];
     const addTaskForm = this.state.addTaskFormVisibility ?
-      <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> : 
+      <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> :
       null;
     return(
       <div>

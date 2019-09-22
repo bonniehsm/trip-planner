@@ -46,7 +46,7 @@ let tripTestObject = [
 const initialState = {
   //trips: tripTestObject
   trips: [],
-  toDos: []
+  toDos: ["first task"]
 }
 
 function rootReducer(state = initialState, action){
@@ -91,10 +91,10 @@ function rootReducer(state = initialState, action){
     }
     case AT.ADD_TASK: {
       console.log(`Add Task reducer activated`);
-      var copy = state;
-      copy.toDos.push(action.payload);
-      console.log(copy);
-      return copy;
+      var newState = state;
+      newState.toDos.push(action.payload);
+      console.log(newState);
+      return newState;
     }
     default: return state;
   }

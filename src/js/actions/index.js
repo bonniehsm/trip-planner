@@ -39,5 +39,5 @@ export const deleteTrip = (tripId) => ({
 //accepts a task to be added to the to-do list
 export const addTask = (task) => ({
   type: AT.ADD_TASK,
-  payload: {task}
+  payload: task
 })

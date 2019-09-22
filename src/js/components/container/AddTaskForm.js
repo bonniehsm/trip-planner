@@ -10,9 +10,9 @@ const mapDispatchToProps = { addTask };
 class AddTaskForm extends Component {
   constructor(props){
     super(props);
-    this.addTask = this.addTask.bind(this);
+    this.createNewTask = this.createNewTask.bind(this);
   }
-  addTask(e){
+  createNewTask(e){
     e.preventDefault();
     console.log(`Submit button clicked --  addTask method`);
     //**test with static string
@@ -30,7 +30,7 @@ class AddTaskForm extends Component {
           </div>
           <div className="add-task--buttons">
             <div className="add-task-buttons--submit">
-              <button onClick={this.addTask}>Submit</button>
+              <button onClick={this.createNewTask}>Submit</button>
             </div>
             <div className="add-task-buttons--cancel">
               <button>Cancel</button>
