@@ -1,4 +1,6 @@
-import { CREATE_TRIP, EDIT_TRIP, VIEW_TRIP_DETAILS, DELETE_TRIP, VIEW_ALL_TRIPS } from "../constants/action_types";
+import { ACTION_TYPES } from "../constants/action_types";
+
+const AT = { ACTION_TYPES };
 
 //OBJECT SHAPE
 let trip = {
@@ -46,14 +48,14 @@ function rootReducer(state = initialState, action){
   console.log(state);
 
   switch (action.type){
-    case CREATE_TRIP: {
+    case AT.CREATE_TRIP: {
       console.log(`createTrip reducer activated`);
       console.log(action.payload);
       return Object.assign({}, state, {
         trips: state.trips.concat(action.payload)
       });
     }
-    case EDIT_TRIP: {
+    case AT.EDIT_TRIP: {
       const updatedItem = action.payload.trip;
       return {
         trips: [...state.trips].map(trip => {
@@ -65,21 +67,28 @@ function rootReducer(state = initialState, action){
         })
       }
     }
-    case VIEW_TRIP_DETAILS: {
+    case AT.VIEW_TRIP_DETAILS: {
       const {id} = action.payload;
       return {
           tripDetailed: [...state.trips].filter(trip => trip.id == id)
       }
     }
-    case VIEW_ALL_TRIPS:{
+    case AT.VIEW_ALL_TRIPS:{
       return state;
     }
-    case DELETE_TRIP: {
+    case AT.DELETE_TRIP: {
       const {id} = action.payload;
       return {
         //filter method creates a new array with all elements that pass the test implemented by the provided function
         trips: [...state.trips].filter(trip => trip.id !== id)
       }
+    }
+    case AT.ADD_TASK: {
+      console.log(`Add Task reducer activated`);
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        toDos: state.toDos.concat(action.payload)
+      });
     }
     default: return state;
   }

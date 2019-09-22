@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import AddTaskForm from "../container/AddTaskForm";
 
 /**
 Connect: extracting data with mapStateToProps
@@ -84,28 +85,6 @@ class ConnectedTripToDos extends Component{
       </div>
     )
   }
-}
-
-function AddTaskForm(){
-  return(
-    <div>
-      <h4>Add Task Form</h4>
-      <form>
-        <div className="add-task--description">
-          <label for="task-description">Description: </label>
-          <input type="text" name="task-description"/>
-        </div>
-        <div className="add-task--buttons">
-          <div className="add-task-buttons--submit">
-            <input type="submit" value="Submit"/>
-          </div>
-          <div className="add-task-buttons--cancel">
-            <button>Cancel</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  )
 }
 
 //as the first argument passed into connect, mapStateToPropsis used for selecting the part of the data from the store that
