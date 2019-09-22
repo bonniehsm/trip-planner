@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
+import { addTask } from "../../actions";
+import { connect } from "react-redux";
+
+//mapDispatchToProps lets you create functions that dispatch when called,
+// and pass those functions as props to your component
+const mapDispatchToProps = { addTask };
+
 
 class AddTaskForm extends Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.addTask = this.addTask.bind(this);
+  }
+  addTask(e){
+    e.preventDefault();
+    console.log(`Submit button clicked --  addTask method`);
+    this.props.addTask("New Task");
   }
   render(){
     return(
@@ -15,7 +28,7 @@ class AddTaskForm extends Component {
           </div>
           <div className="add-task--buttons">
             <div className="add-task-buttons--submit">
-              <button>Submit</button>
+              <button onClick={this.addTask}>Submit</button>
             </div>
             <div className="add-task-buttons--cancel">
               <button>Cancel</button>
@@ -26,4 +39,6 @@ class AddTaskForm extends Component {
     )
   }
 }
-export default AddTaskForm;
+
+//as the 2nd argument passed to connect, mapDispatchToProps is used for dispatching actions to the store
+export default connect(null, mapDispatchToProps)(AddTaskForm);

@@ -1,6 +1,6 @@
 import { ACTION_TYPES } from "../constants/action_types";
 
-const AT = { ACTION_TYPES };
+const AT = { ...ACTION_TYPES };
 
 //accepts a trip to be created as its payload
 //dispatched when the user wants to create a new trip

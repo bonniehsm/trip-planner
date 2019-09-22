@@ -1,6 +1,12 @@
 import { ACTION_TYPES } from "../constants/action_types";
 
-const AT = { ACTION_TYPES };
+const AT = {...ACTION_TYPES};
+console.log(
+  `
+  REDUCER
+  ${AT.ADD_TASK}
+  `
+);
 
 //OBJECT SHAPE
 let trip = {

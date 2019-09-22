@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createTrip } from "../../../js/actions";
+import { createTrip } from "../../actions";
 import { connect } from "react-redux";
 
 const mapDispatchToProps = { createTrip }
