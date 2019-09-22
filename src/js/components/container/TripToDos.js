@@ -57,6 +57,7 @@ class ConnectedTripToDos extends Component{
     }
     this.addToDo = this.addToDo.bind(this);
     //this.deleteToDo = this.deleteToDo.bind(this);
+    this.changeTaskFormVisibility = this.changeTaskFormVisibility.bind(this);
   }
 
   addToDo(e){
@@ -67,13 +68,20 @@ class ConnectedTripToDos extends Component{
       return {addTaskFormVisibility: !state.addTaskFormVisibility}
     })
   }
+  changeTaskFormVisibility(){
+    this.setState((state,props)=>{
+      return {addTaskFormVisibility: !state.addTaskFormVisibility}
+    })
+  }
 
   render(){
     console.log(this.props);
     console.log(this.state);
     const testItem = "test item";
     const testList = ["item 1", "item 2", "item 3", "item 4"];
-    const addTaskForm = this.state.addTaskFormVisibility ? <AddTaskForm/> : null;
+    const addTaskForm = this.state.addTaskFormVisibility ?
+      <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> : 
+      null;
     return(
       <div>
         <h2>View TripToDos Component</h2>

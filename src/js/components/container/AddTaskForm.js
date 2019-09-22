@@ -15,7 +15,9 @@ class AddTaskForm extends Component {
   addTask(e){
     e.preventDefault();
     console.log(`Submit button clicked --  addTask method`);
+    //**test with static string
     this.props.addTask("New Task");
+    this.props.toggleForm();
   }
   render(){
     return(

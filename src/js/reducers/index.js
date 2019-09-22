@@ -91,10 +91,10 @@ function rootReducer(state = initialState, action){
     }
     case AT.ADD_TASK: {
       console.log(`Add Task reducer activated`);
-      console.log(action.payload);
-      return Object.assign({}, state, {
-        toDos: state.toDos.concat(action.payload)
-      });
+      var copy = state;
+      copy.toDos.push(action.payload);
+      console.log(copy);
+      return copy;
     }
     default: return state;
   }
