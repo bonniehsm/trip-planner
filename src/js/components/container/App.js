@@ -16,6 +16,7 @@ class App extends Component {
           <h1>App Component</h1>
           <Dashboard/>
           <p><Link to="createTrip">Create Trip</Link></p>
+          <p><Link to="todos">To-Do's</Link></p>
           <Route path="/viewDashboard" component = {ViewDashboard}/>
           <Route path="/view/:id" component = {ViewTripDetails}/>
           <Route path="/todos" component = {TripToDos}/>

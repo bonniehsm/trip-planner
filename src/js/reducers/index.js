@@ -11,7 +11,7 @@ let trip = {
   returnDateTime: "",
   returnArrivalDateTime: "",
 }
-
+/*
 let tripTestObject = [
   {
     tripId: "1",
@@ -34,7 +34,7 @@ let tripTestObject = [
     returnArrivalDateTime: new Date('December 15, 2019 14:45:00'),
   }
 ]
-
+*/
 const initialState = {
   //trips: tripTestObject
   trips: []
