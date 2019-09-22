@@ -15,7 +15,7 @@ Connect: extracting data with mapStateToProps
  1st argument: entire Redux store state
 **/
 const mapStateToProps = state => {
-  return { toDos: state.todos };
+  return { toDos: state.toDos };
 }
 
 function ViewToDosList(props){
@@ -51,23 +51,61 @@ function ListItem(props){
 class ConnectedTripToDos extends Component{
   constructor(props){
     super(props);
-    //this.addToDo = this.addToDo.bind(this);
+    this.state = {
+      addTaskFormVisibility: false
+    }
+    this.addToDo = this.addToDo.bind(this);
     //this.deleteToDo = this.deleteToDo.bind(this);
+  }
+
+  addToDo(e){
+    e.preventDefault();
+    console.log("Add Task form clicked");
+
+    this.setState((state, props) => {
+      return {addTaskFormVisibility: !state.addTaskFormVisibility}
+    })
   }
 
   render(){
     console.log(this.props);
+    console.log(this.state);
     const testItem = "test item";
     const testList = ["item 1", "item 2", "item 3", "item 4"];
+    const addTaskForm = this.state.addTaskFormVisibility ? <AddTaskForm/> : null;
     return(
       <div>
         <h2>View TripToDos Component</h2>
         <div className="todo--list">
-          <ViewToDosList list={testList}/>
+          <ViewToDosList list={this.props.toDos}/>
         </div>
+        <button onClick={this.addToDo}>Add Task</button>
+        { addTaskForm }
       </div>
     )
   }
+}
+
+function AddTaskForm(){
+  return(
+    <div>
+      <h4>Add Task Form</h4>
+      <form>
+        <div className="add-task--description">
+          <label for="task-description">Description: </label>
+          <input type="text" name="task-description"/>
+        </div>
+        <div className="add-task--buttons">
+          <div className="add-task-buttons--submit">
+            <input type="submit" value="Submit"/>
+          </div>
+          <div className="add-task-buttons--cancel">
+            <button>Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  )
 }
 
 //as the first argument passed into connect, mapStateToPropsis used for selecting the part of the data from the store that
