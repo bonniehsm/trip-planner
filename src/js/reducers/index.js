@@ -37,7 +37,8 @@ let tripTestObject = [
 */
 const initialState = {
   //trips: tripTestObject
-  trips: []
+  trips: [],
+  toDos: []
 }
 
 function rootReducer(state = initialState, action){

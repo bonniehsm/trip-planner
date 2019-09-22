@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 Connect: extracting data with mapStateToProps
 1. connect method
 2. define mapStateToProps
-  - should take a first argument: state, and optionally a second argument: ownProps
+  - should take a 1st argument: state, and optionally a 2nd argument: ownProps
   - return: plain object containing the data that the connected component needs
   - this function will be called from connect() everytime the state changes
     - if you do not wish to subscribe to the store, pass null or undefined to connect in place of mapStateToProps
@@ -19,15 +19,21 @@ const mapStateToProps = state => {
 }
 
 function ViewToDosList(props){
-  console.log("ViewToDosList component");
-  const items = props.list;
-  const id = `item-`
-  console.log(items);
+  console.log(
+    `
+    ViewToDosList component
+    ${props.list}
+    `
+  );
   return(
     <div>
       <h3>List</h3>
       <ul>
-        <ListItem items={props.list}/>
+        {
+          (props.list.length > 0) ?
+            <ListItem items={props.list}/> : "You have nothing to do."
+        }
+
       </ul>
     </div>
   );
@@ -45,12 +51,12 @@ function ListItem(props){
 class ConnectedTripToDos extends Component{
   constructor(props){
     super(props);
-
     //this.addToDo = this.addToDo.bind(this);
     //this.deleteToDo = this.deleteToDo.bind(this);
   }
 
   render(){
+    console.log(this.props);
     const testItem = "test item";
     const testList = ["item 1", "item 2", "item 3", "item 4"];
     return(
