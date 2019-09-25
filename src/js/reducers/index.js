@@ -46,7 +46,14 @@ let tripTestObject = [
 const initialState = {
   //trips: tripTestObject
   trips: [],
-  toDos: ["first task"]
+  toDos: [
+    {
+      taskName: "first task",
+      done: false,
+      dueDate: Date.now(),
+      priority: false
+    }
+  ]
 }
 
 function rootReducer(state = initialState, action){

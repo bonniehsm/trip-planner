@@ -50,9 +50,22 @@ function ListItem(props){
   console.log(`You have a task-- ListItem component rendered`);
   const items = props.items;
   const listItems = items.map((item, index) => {
-    return <li key={`todo--item-${index}`}>{ item }</li>
+    return <li key={`todo--item-${index}`}><ListItemDetail details={item}/></li>
   });
   return listItems;
+}
+
+function ListItemDetail(props){
+  const taskDetail = props.details;
+  const date = new Date(taskDetail.dueDate);
+  return(
+    <div>
+      <p>{taskDetail.taskName}</p>
+      <p>{taskDetail.done == true ? "Done" : "Not Done"}</p>
+      <p>Due: {date.toString()}</p>
+      <p>Priority: {taskDetail.priority == true ? "High" : "Low"}</p>
+    </div>
+  )
 }
 
 
