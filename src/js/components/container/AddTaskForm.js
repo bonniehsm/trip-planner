@@ -12,6 +12,9 @@ class AddTaskForm extends Component {
     super(props);
     this.createNewTask = this.createNewTask.bind(this);
   }
+  componentDidMount(){
+    document.getElementById("add-task--form").onsubmit = function() {createNewTask()};
+  }
   createNewTask(e){
     e.preventDefault();
     console.log(`Submit button clicked --  addTask method`);
@@ -23,10 +26,19 @@ class AddTaskForm extends Component {
     return(
       <div className="add-task-form--container">
         <h4>Add Task Form</h4>
-        <form>
+        <form id="add-task--form">
           <div className="add-task--description">
             <label htmlFor="task-description">Description: </label>
             <input type="text" name="task-description"/>
+          </div>
+          <div className="add-task--dueDate">
+            <label htmlFor="task-dueDate">Due Date: </label>
+            <input type="date" name="task-dueDate"/>
+          </div>
+          <div className="add-task--priority">
+            <label htmlFor="task-priority">Priority: </label>
+            <input type="radio" name="task-priority"/>High
+            <input type="radio" name="task-priority" defaultChecked/>Low
           </div>
           <div className="add-task--buttons">
             <div className="add-task-buttons--submit">
