@@ -38,7 +38,7 @@ function ViewToDosList(props){
       <ul>
         {
           (props.list.length > 0) ?
-            <ListItem items={props.list}/> : "You have nothing to do."
+            <ListItem items={props.list} modifyOptions={props.modify}/> : "You have nothing to do."
         }
 
       </ul>
@@ -49,6 +49,7 @@ function ViewToDosList(props){
 function ListItem(props){
   console.log(`You have a task-- ListItem component rendered`);
   const items = props.items;
+  
   const listItems = items.map((item, index) => {
     return <li key={`todo--item-${index}`}><ListItemDetail details={item}/></li>
   });
@@ -73,19 +74,30 @@ class ConnectedTripToDos extends Component{
   constructor(props){
     super(props);
     this.state = {
-      addTaskFormVisibility: false
+      addTaskFormVisibility: false,
+      modifyTasksVisibility: false
     }
     this.addToDo = this.addToDo.bind(this);
-    //this.deleteToDo = this.deleteToDo.bind(this);
+    this.modifyToDo = this.modifyToDo.bind(this);
     this.changeTaskFormVisibility = this.changeTaskFormVisibility.bind(this);
   }
-
   addToDo(e){
     e.preventDefault();
     console.log("Add Task form clicked");
 
     this.setState((state, props) => {
       return {addTaskFormVisibility: !state.addTaskFormVisibility}
+    })
+  }
+  modifyToDo(e){
+    e.preventDefault();
+    console.log("Modify Task form clicked");
+
+    this.setState((state, props) => {
+      return {
+        addTaskFormVisibility: false,
+        modifyTasksVisibility: true
+      }
     })
   }
   changeTaskFormVisibility(){
@@ -101,9 +113,7 @@ class ConnectedTripToDos extends Component{
       ${this.props.toDos}
       `
     );
-
     //console.log(this.state);
-    //const testItem = "test item";
     //const testList = ["item 1", "item 2", "item 3", "item 4"];
     const addTaskForm = this.state.addTaskFormVisibility ?
       <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> :
@@ -112,8 +122,9 @@ class ConnectedTripToDos extends Component{
       <div>
         <h2>View TripToDos Component</h2>
         <div className="todo--list">
-          <ViewToDosList list={this.props.toDos}/>
+          <ViewToDosList list={this.props.toDos} modify={this.state.modifyTasksVisibility}/>
         </div>
+        <button onClick={this.modifyToDo}>Edit/Delete Task</button>
         <button onClick={this.addToDo}>Add Task</button>
         { addTaskForm }
       </div>

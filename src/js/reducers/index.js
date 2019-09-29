@@ -104,6 +104,10 @@ function rootReducer(state = initialState, action){
       console.log(newState);
       return newState;
     }
+    case AT.DELETE_TASK: {
+      console.log(`Delete Task Reducer activated`);
+      console.log(action.payload);
+    }
     default: return state;
   }
 

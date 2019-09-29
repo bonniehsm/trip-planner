@@ -41,3 +41,9 @@ export const addTask = (task) => ({
   type: AT.ADD_TASK,
   payload: task
 })
+
+//accepts the task name to be deleted from the to-do list
+export const deleteTask = (taskName) => ({
+  type: AT.DELETE_TASK,
+  payload: taskName
+})
