@@ -14,21 +14,16 @@ function TaskRadio(props){
     Radio component
     `
   );
-  /*
-  <div className="add-task--priority">
-    <label htmlFor="priority">Priority: </label>
-    <input type="radio" name="priority" defaultChecked={this.state.priority} onChange={this.handleChange}/>High
-    <input type="radio" name="priority" defaultChecked={!this.state.priority} onChange={this.handleChange}/>Low
-  </div>
-  */
   const radioOptions = radio.options.map(function(option, index){
     return (
       <div className={`add-task--${radio.name}`} key={`${radio.name}-${index}`}>
-        <input type="radio" name={radio.name} defaultChecked={option.checked} onChange={props.handler} value={option.displayValue}/>{option.displayValue}
+        <label>
+          <input type="radio" name={radio.name} defaultChecked={option.checked} onChange={props.handler} value={option.displayValue}/>{option.displayValue}
+        </label>
       </div>
     )
   });
-  console.log(radioOptions);
+
   return(
     <div>
       <label htmlFor={radio.name}>{radio.label}</label>
@@ -71,7 +66,6 @@ class AddTaskForm extends Component {
   createNewTask(e){
     e.preventDefault();
     console.log(`Submit button clicked --  addTask method`);
-    //**test with static string
     this.props.addTask(this.state);
     this.props.toggleForm();
   }

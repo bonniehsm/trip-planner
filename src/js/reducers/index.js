@@ -100,7 +100,6 @@ function rootReducer(state = initialState, action){
     case AT.ADD_TASK: {
       console.log(`Add Task reducer activated`);
       var newState = state;
-      console.log(newState);
       newState.toDos.push(action.payload);
       console.log(newState);
       return newState;
