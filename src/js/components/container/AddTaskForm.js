@@ -14,9 +14,16 @@ function TaskRadio(props){
     Radio component
     `
   );
+  /*
+  <div className="add-task--priority">
+    <label htmlFor="priority">Priority: </label>
+    <input type="radio" name="priority" defaultChecked={this.state.priority} onChange={this.handleChange}/>High
+    <input type="radio" name="priority" defaultChecked={!this.state.priority} onChange={this.handleChange}/>Low
+  </div>
+  */
   const radioOptions = radio.options.map(function(option, index){
     return (
-      <div className="add-task--done" key={`${radio.name}-${index}`}>
+      <div className={`add-task--${radio.name}`} key={`${radio.name}-${index}`}>
         <input type="radio" name={radio.name} defaultChecked={option.checked} onChange={props.handler} value={option.displayValue}/>{option.displayValue}
       </div>
     )
@@ -48,8 +55,8 @@ class AddTaskForm extends Component {
     let value = target.value;
     console.log(`handleChange() - name: ${name}, value: ${target.value}`);
     console.log(e);
-    if(target.name==='done'){
-      if(target.value==='Yes'){
+    if(target.name==='done' || target.name==='priority'){
+      if(target.value==='Yes' || target.value==='High'){
         console.log(`target.value is ${target.value}`);
         value = true;
       }else{
@@ -78,7 +85,7 @@ class AddTaskForm extends Component {
       ]
     };
     const taskPriority = {
-      name: 'label',
+      name: 'priority',
       label: 'Priority:',
       options: [
         {displayValue: 'High', checked: this.state.priority},
@@ -98,11 +105,7 @@ class AddTaskForm extends Component {
             <label htmlFor="dueDate">Due Date: </label>
             <input type="date" name="dueDate" value={this.state.dueDate} onChange={this.handleChange}/>
           </div>
-          <div className="add-task--priority">
-            <label htmlFor="priority">Priority: </label>
-            <input type="radio" name="priority" defaultChecked={this.state.priority} onChange={this.handleChange}/>High
-            <input type="radio" name="priority" defaultChecked={!this.state.priority} onChange={this.handleChange}/>Low
-          </div>
+          <TaskRadio radioType={taskPriority} handler={this.handleChange}/>
           <div className="add-task--buttons">
             <div className="add-task-buttons--submit">
               <button onClick={this.createNewTask}>Submit</button>

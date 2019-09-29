@@ -57,12 +57,12 @@ function ListItem(props){
 
 function ListItemDetail(props){
   const taskDetail = props.details;
-  const date = new Date(taskDetail.dueDate);
+  const date = new Date(taskDetail.dueDate);  //
   return(
     <div>
       <p>{taskDetail.taskName}</p>
       <p>{taskDetail.done == true ? "Done" : "Not Done"}</p>
-      <p>Due: {date.toString()}</p>
+      <p>Due: {taskDetail.dueDate}</p>
       <p>Priority: {taskDetail.priority == true ? "High" : "Low"}</p>
     </div>
   )
@@ -103,8 +103,8 @@ class ConnectedTripToDos extends Component{
     );
 
     //console.log(this.state);
-    const testItem = "test item";
-    const testList = ["item 1", "item 2", "item 3", "item 4"];
+    //const testItem = "test item";
+    //const testList = ["item 1", "item 2", "item 3", "item 4"];
     const addTaskForm = this.state.addTaskFormVisibility ?
       <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> :
       null;
