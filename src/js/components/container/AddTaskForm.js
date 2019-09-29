@@ -7,19 +7,25 @@ import { connect } from "react-redux";
 const mapDispatchToProps = { addTask };
 
 
-function TaskRadio(){
+function TaskRadio(props){
   const radio = props.radioType;
-  /*
-  <div className="add-task--done">
-    <label htmlFor="done">Completed? </label>
-    <input type="radio" name="done" defaultChecked={this.state.done} onChange={this.handleChange}/>Yes
-    <input type="radio" name="done" defaultChecked={!this.state.done} onChange={this.handleChange}/>No
-  </div>
-  */
+  console.log(
+    `
+    Radio component
+    `
+  );
+  const radioOptions = radio.options.map(function(option, index){
+    return (
+      <div className="add-task--done" key={`${radio.name}-${index}`}>
+        <input type="radio" name={radio.name} defaultChecked={option.checked} onChange={props.handler} value={option.displayValue}/>{option.displayValue}
+      </div>
+    )
+  });
+  console.log(radioOptions);
   return(
     <div>
       <label htmlFor={radio.name}>{radio.label}</label>
-
+      {radioOptions}
     </div>
   )
 }
@@ -28,7 +34,7 @@ class AddTaskForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      description: '',
+      taskName: '',
       done: false,
       dueDate: '',
       priority: false,
@@ -39,16 +45,27 @@ class AddTaskForm extends Component {
   handleChange(e){
     const target = e.target;
     const name = target.name;
+    let value = target.value;
     console.log(`handleChange() - name: ${name}, value: ${target.value}`);
+    console.log(e);
+    if(target.name==='done'){
+      if(target.value==='Yes'){
+        console.log(`target.value is ${target.value}`);
+        value = true;
+      }else{
+        console.log(`target.value is ${target.value}`);
+        value = false;
+      }
+    }
     this.setState({
-      [name]: target.value
+      [name]: value
     })
   }
   createNewTask(e){
     e.preventDefault();
     console.log(`Submit button clicked --  addTask method`);
     //**test with static string
-    this.props.addTask("New Task");
+    this.props.addTask(this.state);
     this.props.toggleForm();
   }
   render(){
@@ -73,10 +90,10 @@ class AddTaskForm extends Component {
         <h4>Add Task Form</h4>
         <form id="add-task--form" onSubmit={this.createNewTask}>
           <div className="add-task--description">
-            <label htmlFor="description">Description: </label>
-            <input type="text" name="description" value={this.state.description} onChange={this.handleChange}/>
+            <label htmlFor="taskName">Task Name: </label>
+            <input type="text" name="taskName" value={this.state.taskName} onChange={this.handleChange}/>
           </div>
-          <TaskRadio radioType={taskDone}/>
+          <TaskRadio radioType={taskDone} handler={this.handleChange}/>
           <div className="add-task--dueDate">
             <label htmlFor="dueDate">Due Date: </label>
             <input type="date" name="dueDate" value={this.state.dueDate} onChange={this.handleChange}/>
