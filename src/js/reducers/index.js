@@ -8,7 +8,7 @@ console.log(
   `
 );
 
-//OBJECT SHAPE
+//TRIPS OBJECT SHAPE
 let trip = {
   tripId: "",
   destination: "",
@@ -19,7 +19,7 @@ let trip = {
   returnDateTime: "",
   returnArrivalDateTime: "",
 }
-/*
+
 let tripTestObject = [
   {
     tripId: "1",
@@ -42,10 +42,10 @@ let tripTestObject = [
     returnArrivalDateTime: new Date('December 15, 2019 14:45:00'),
   }
 ]
-*/
+
 
 const initialState = {
-  //trips: tripTestObject
+  //trips: tripTestObject,
   trips: [],
   toDos: [  //temp - create default task
     {
@@ -107,6 +107,10 @@ function rootReducer(state = initialState, action){
     case AT.DELETE_TASK: {
       console.log(`Delete Task Reducer activated`);
       console.log(action.payload);
+      const toDos = state.toDos;
+      var newState = toDos.filter(toDo => toDo.taskName !== action.payload);
+      console.log(newState);
+      return newState;
     }
     default: return state;
   }

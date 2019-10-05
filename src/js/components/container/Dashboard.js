@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
@@ -7,7 +7,7 @@ const tripStyle = {
   margin: '10px auto',
 };
 
-class Dashboard extends React.Component{
+class Dashboard extends Component{
   constructor(props){
     super(props);
     this.renderTrips = this.renderTrips.bind(this);
@@ -35,11 +35,12 @@ class Dashboard extends React.Component{
   render(){
     console.log(`Dashboard render function`);
     console.log(this.props.trips);
+
     return(
       <div>
         <h1>Trips Dashboard</h1>
         {
-          this.props.trips.map(trip => (this.renderTrips(trip.trip)))
+          this.props.trips.length > 0 ? this.props.trips.map(trip => (this.renderTrips(trip))) : "No Trips Planned"
         }
       </div>
     )
@@ -50,18 +51,5 @@ class Dashboard extends React.Component{
 const mapStateToProps = ({trips}) => {
   return ({ trips });
 };
-
-const ConnectedDashboard = ({trips}) => {
-  console.log(`ConnectedDashboard`);
-  console.log(trips);
-  return(
-    <div>
-      <h1>Trips Dashboard</h1>
-      {
-        trips.map(trip => (renderTrips(trip)))
-      }
-    </div>
-  )
-}
 
 export default connect(mapStateToProps, null)(Dashboard);

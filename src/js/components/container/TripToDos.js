@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { deleteTask } from "../../actions";
 import AddTaskForm from "../container/AddTaskForm";
 
-/**
-Connect: extracting data with mapStateToProps
-1. connect method
-2. define mapStateToProps
-  - should take a 1st argument: state, and optionally a 2nd argument: ownProps
-  - return: plain object containing the data that the connected component needs
-  - this function will be called from connect() everytime the state changes
-    - if you do not wish to subscribe to the store, pass null or undefined to connect in place of mapStateToProps
-**/
+
+const mapDispatchToProps = { deleteTask };
 
 /**
  1st argument: entire Redux store state
@@ -25,10 +19,10 @@ const mapStateToProps = state => {
   return { toDos: state.toDos };
 }
 
-function ViewToDosList(props){
+function TasksList(props){
   console.log(
     `
-    ViewToDosList component
+    TasksList component
     ${props.list}
     `
   );
@@ -38,9 +32,8 @@ function ViewToDosList(props){
       <ul>
         {
           (props.list.length > 0) ?
-            <ListItem items={props.list} modifyOptions={props.modify}/> : "You have nothing to do."
+            <ListItem items={props.list}  modifyHandler={props.modifyButtonHandler}/> : "You have nothing to do."
         }
-
       </ul>
     </div>
   );
@@ -49,9 +42,14 @@ function ViewToDosList(props){
 function ListItem(props){
   console.log(`You have a task-- ListItem component rendered`);
   const items = props.items;
-  
+
   const listItems = items.map((item, index) => {
-    return <li key={`todo--item-${index}`}><ListItemDetail details={item}/></li>
+    return(
+      <li key={`todo--item-${index}`}>
+        <ListItemDetail details={item}/>
+        <button onClick={props.modifyHandler(item.taskName)}>Delete</button>
+      </li>
+    )
   });
   return listItems;
 }
@@ -75,10 +73,9 @@ class ConnectedTripToDos extends Component{
     super(props);
     this.state = {
       addTaskFormVisibility: false,
-      modifyTasksVisibility: false
     }
     this.addToDo = this.addToDo.bind(this);
-    this.modifyToDo = this.modifyToDo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.changeTaskFormVisibility = this.changeTaskFormVisibility.bind(this);
   }
   addToDo(e){
@@ -89,23 +86,19 @@ class ConnectedTripToDos extends Component{
       return {addTaskFormVisibility: !state.addTaskFormVisibility}
     })
   }
-  modifyToDo(e){
-    e.preventDefault();
-    console.log("Modify Task form clicked");
-
-    this.setState((state, props) => {
-      return {
-        addTaskFormVisibility: false,
-        modifyTasksVisibility: true
-      }
-    })
-  }
   changeTaskFormVisibility(){
     this.setState((state,props)=>{
       return {addTaskFormVisibility: !state.addTaskFormVisibility}
     })
   }
-
+  handleChange(taskName){
+    console.log(
+      `
+      TripToDos Delete Task Handler
+      `
+    );
+    this.props.deleteTask(taskName);
+  }
   render(){
     console.log(
       `
@@ -122,9 +115,8 @@ class ConnectedTripToDos extends Component{
       <div>
         <h2>View TripToDos Component</h2>
         <div className="todo--list">
-          <ViewToDosList list={this.props.toDos} modify={this.state.modifyTasksVisibility}/>
+          <TasksList list={this.props.toDos} modifyButtonHandler={this.handleChange}/>
         </div>
-        <button onClick={this.modifyToDo}>Edit/Delete Task</button>
         <button onClick={this.addToDo}>Add Task</button>
         { addTaskForm }
       </div>
@@ -132,8 +124,18 @@ class ConnectedTripToDos extends Component{
   }
 }
 
+
+/**
+Connect: extracting data with mapStateToProps
+1. connect method
+2. define mapStateToProps
+  - should take a 1st argument: state, and optionally a 2nd argument: ownProps
+  - return: plain object containing the data that the connected component needs
+  - this function will be called from connect() everytime the state changes
+    - if you do not wish to subscribe to the store, pass null or undefined to connect in place of mapStateToProps
+**/
 //as the first argument passed into connect, mapStateToPropsis used for selecting the part of the data from the store that
 //  the connected component needs
-const TripToDos = connect(mapStateToProps)(ConnectedTripToDos);
+const TripToDos = connect(mapStateToProps, mapDispatchToProps)(ConnectedTripToDos);
 
 export default TripToDos;
