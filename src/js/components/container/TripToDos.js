@@ -27,7 +27,7 @@ function TasksList(props){
       <ul>
         {
           (props.list.length > 0) ?
-            <ListItem items={props.list}  modifyHandler={props.modifyButtonHandler}/> : "You have nothing to do."
+            <ListItem items={props.list}  deleteHandler={props.deleteHandler}/> : "You have nothing to do."
         }
       </ul>
     </div>
@@ -41,7 +41,7 @@ function ListItem(props){
   const listItems = items.map((item, index) => {
     return(
       <li key={`todo--item-${index}`}>
-        <ListItemDetail details={item} modifyHandler={props.modifyHandler}/>
+        <ListItemDetail details={item} deleteHandler={props.deleteHandler}/>
 
       </li>
     )
@@ -58,7 +58,7 @@ function ListItemDetail(props){
       <p>{taskDetail.done == true ? "Done" : "Not Done"}</p>
       <p>Due: {taskDetail.dueDate}</p>
       <p>Priority: {taskDetail.priority == true ? "High" : "Low"}</p>
-      <button onClick={props.modifyHandler(taskDetail.taskName)}>Delete</button>
+      <button onClick={props.deleteHandler(taskDetail.taskName)}>Delete</button>
     </div>
   )
 }
@@ -110,7 +110,7 @@ class TripToDos extends Component{
       <div>
         <h2>View TripToDos Component</h2>
         <div className="todo--list">
-          <TasksList list={this.props.toDos} modifyButtonHandler={this.deleteTaskHandler}/>
+          <TasksList list={this.props.toDos} deleteHandler={this.deleteTaskHandler}/>
         </div>
         <button onClick={this.addToDo}>Add Task</button>
         { addTaskForm }
