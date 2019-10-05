@@ -35,12 +35,16 @@ class Dashboard extends Component{
   render(){
     console.log(`Dashboard render function`);
     console.log(this.props.trips);
-
+    let tripsPlanned = true;
+    if(this.props.trips == undefined){
+      console.log(`TRIPS STORE UNDEFINED`);
+      tripsPlanned = false;
+    }
     return(
       <div>
         <h1>Trips Dashboard</h1>
         {
-          this.props.trips.length > 0 ? this.props.trips.map(trip => (this.renderTrips(trip))) : "No Trips Planned"
+          tripsPlanned ? this.props.trips.map(trip => (this.renderTrips(trip))) : "No Trips Planned"
         }
       </div>
     )

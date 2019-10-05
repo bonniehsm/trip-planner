@@ -3,12 +3,7 @@ import { connect } from "react-redux";
 import { deleteTask } from "../../actions";
 import AddTaskForm from "../container/AddTaskForm";
 
-
 const mapDispatchToProps = { deleteTask };
-
-/**
- 1st argument: entire Redux store state
-**/
 const mapStateToProps = state => {
   console.log(
     `
@@ -46,8 +41,8 @@ function ListItem(props){
   const listItems = items.map((item, index) => {
     return(
       <li key={`todo--item-${index}`}>
-        <ListItemDetail details={item}/>
-        <button onClick={props.modifyHandler(item.taskName)}>Delete</button>
+        <ListItemDetail details={item} modifyHandler={props.modifyHandler}/>
+
       </li>
     )
   });
@@ -63,19 +58,19 @@ function ListItemDetail(props){
       <p>{taskDetail.done == true ? "Done" : "Not Done"}</p>
       <p>Due: {taskDetail.dueDate}</p>
       <p>Priority: {taskDetail.priority == true ? "High" : "Low"}</p>
+      <button onClick={props.modifyHandler(taskDetail.taskName)}>Delete</button>
     </div>
   )
 }
 
-
-class ConnectedTripToDos extends Component{
+class TripToDos extends Component{
   constructor(props){
     super(props);
     this.state = {
       addTaskFormVisibility: false,
     }
     this.addToDo = this.addToDo.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.deleteTaskHandler = this.deleteTaskHandler.bind(this);
     this.changeTaskFormVisibility = this.changeTaskFormVisibility.bind(this);
   }
   addToDo(e){
@@ -91,13 +86,14 @@ class ConnectedTripToDos extends Component{
       return {addTaskFormVisibility: !state.addTaskFormVisibility}
     })
   }
-  handleChange(taskName){
+  deleteTaskHandler(taskName){
+
     console.log(
       `
       TripToDos Delete Task Handler
       `
     );
-    this.props.deleteTask(taskName);
+    //this.props.deleteTask(taskName);
   }
   render(){
     console.log(
@@ -107,7 +103,6 @@ class ConnectedTripToDos extends Component{
       `
     );
     //console.log(this.state);
-    //const testList = ["item 1", "item 2", "item 3", "item 4"];
     const addTaskForm = this.state.addTaskFormVisibility ?
       <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> :
       null;
@@ -115,7 +110,7 @@ class ConnectedTripToDos extends Component{
       <div>
         <h2>View TripToDos Component</h2>
         <div className="todo--list">
-          <TasksList list={this.props.toDos} modifyButtonHandler={this.handleChange}/>
+          <TasksList list={this.props.toDos} modifyButtonHandler={this.deleteTaskHandler}/>
         </div>
         <button onClick={this.addToDo}>Add Task</button>
         { addTaskForm }
@@ -124,18 +119,4 @@ class ConnectedTripToDos extends Component{
   }
 }
 
-
-/**
-Connect: extracting data with mapStateToProps
-1. connect method
-2. define mapStateToProps
-  - should take a 1st argument: state, and optionally a 2nd argument: ownProps
-  - return: plain object containing the data that the connected component needs
-  - this function will be called from connect() everytime the state changes
-    - if you do not wish to subscribe to the store, pass null or undefined to connect in place of mapStateToProps
-**/
-//as the first argument passed into connect, mapStateToPropsis used for selecting the part of the data from the store that
-//  the connected component needs
-const TripToDos = connect(mapStateToProps, mapDispatchToProps)(ConnectedTripToDos);
-
-export default TripToDos;
+export default connect(mapStateToProps, mapDispatchToProps)(TripToDos);
