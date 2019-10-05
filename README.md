@@ -1,3 +1,3 @@
 # trip-planner
 
-An app for me to practice creating a full-stack web application
+Application to track details of your trips.
