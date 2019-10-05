@@ -2,11 +2,6 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 
-const tripStyle = {
-  border: '1px solid black',
-  margin: '10px auto',
-};
-
 class Dashboard extends Component{
   constructor(props){
     super(props);
@@ -33,11 +28,11 @@ class Dashboard extends Component{
     return Math.round((departureDateTime - todayDateTime)/msPerDay);
   }
   render(){
-    console.log(`Dashboard render function`);
+    console.log(`Dashboard Component -- render`);
     console.log(this.props.trips);
     let tripsPlanned = true;
-    if(this.props.trips == undefined){
-      console.log(`TRIPS STORE UNDEFINED`);
+    if(this.props.trips == undefined || this.props.trips.length == 0){
+      console.log(`TRIPS STORE ARRAY is UNDEFINED or has LENGTH == 0`);
       tripsPlanned = false;
     }
     return(

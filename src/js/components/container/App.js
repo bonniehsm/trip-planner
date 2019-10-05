@@ -6,8 +6,6 @@ import TripToDos from "./TripToDos";
 import CreateTrip from "./CreateTrip";
 
 class App extends Component {
-
-
   render(){
     return(
       <Router>

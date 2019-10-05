@@ -1,12 +1,6 @@
 import { ACTION_TYPES } from "../constants/action_types";
 
 const AT = {...ACTION_TYPES};
-console.log(
-  `
-  REDUCER
-  ${AT.ADD_TASK}
-  `
-);
 
 //TRIPS OBJECT SHAPE
 let trip = {
@@ -43,7 +37,6 @@ let tripTestObject = [
   }
 ]
 
-
 const initialState = {
   //trips: tripTestObject,
   trips: [],
@@ -58,9 +51,8 @@ const initialState = {
 }
 
 function rootReducer(state = initialState, action){
-  console.log("rootReducer");
+  console.log(`rootReducer function`);
   console.log(state);
-
   switch (action.type){
     case AT.CREATE_TRIP: {
       console.log(`createTrip reducer activated`);
@@ -114,7 +106,6 @@ function rootReducer(state = initialState, action){
     }
     default: return state;
   }
-
 }
 
 export default rootReducer;

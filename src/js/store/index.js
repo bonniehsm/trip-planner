@@ -3,7 +3,7 @@ import rootReducer from "../reducers/index";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension/logOnlyInProduction";
 
-//thunk - ability to write action creators that return a function instead of an action e.g. fetech data from server
+//thunk - ability to write action creators that return a function instead of an action e.g. fetch data from server
 const middlewares = [thunk];
 
 //the state of the application lives as a single, immutable object within the store

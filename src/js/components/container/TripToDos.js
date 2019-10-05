@@ -25,24 +25,20 @@ function TasksList(props){
     <div>
       <h3>List</h3>
       <ul>
-        {
-          (props.list.length > 0) ?
-            <ListItem items={props.list}  deleteHandler={props.deleteHandler}/> : "You have nothing to do."
-        }
+          <ListItem items={props.list}  deleteHandler={props.deleteHandler}/>
       </ul>
     </div>
   );
 }
 
 function ListItem(props){
-  console.log(`You have a task-- ListItem component rendered`);
+  console.log(`ListItem component rendered--You have a task`);
   const items = props.items;
-
   const listItems = items.map((item, index) => {
     return(
       <li key={`todo--item-${index}`}>
-        <ListItemDetail details={item} deleteHandler={props.deleteHandler}/>
-
+        <ListItemDetail details={item}/>
+        <button onClick={props.deleteHandler}>Delete</button>
       </li>
     )
   });
@@ -58,7 +54,6 @@ function ListItemDetail(props){
       <p>{taskDetail.done == true ? "Done" : "Not Done"}</p>
       <p>Due: {taskDetail.dueDate}</p>
       <p>Priority: {taskDetail.priority == true ? "High" : "Low"}</p>
-      <button onClick={props.deleteHandler(taskDetail.taskName)}>Delete</button>
     </div>
   )
 }
@@ -87,13 +82,13 @@ class TripToDos extends Component{
     })
   }
   deleteTaskHandler(taskName){
-
     console.log(
       `
       TripToDos Delete Task Handler
+      ${taskName}
       `
     );
-    //this.props.deleteTask(taskName);
+    this.props.deleteTask(taskName);
   }
   render(){
     console.log(
@@ -103,14 +98,23 @@ class TripToDos extends Component{
       `
     );
     //console.log(this.state);
+    let tasksAvailable = true;
+    if(this.props.toDos == undefined || this.props.toDos.length == 0){
+      console.log(`toDos object is UNDEFINED or has LENGTH == 0`)
+      tasksAvailable = false;
+    }
     const addTaskForm = this.state.addTaskFormVisibility ?
       <AddTaskForm toggleForm={this.changeTaskFormVisibility}/> :
       null;
     return(
       <div>
-        <h2>View TripToDos Component</h2>
+        <h2>TripToDos Component</h2>
         <div className="todo--list">
-          <TasksList list={this.props.toDos} deleteHandler={this.deleteTaskHandler}/>
+          {
+            tasksAvailable ?
+              <TasksList list={this.props.toDos} deleteHandler={this.deleteTaskHandler}/> :
+              "There is nothing to do"
+          }
         </div>
         <button onClick={this.addToDo}>Add Task</button>
         { addTaskForm }
