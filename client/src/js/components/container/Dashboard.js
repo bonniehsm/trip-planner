@@ -7,6 +7,15 @@ class Dashboard extends Component{
     super(props);
     this.renderTrips = this.renderTrips.bind(this);
     this.getDaysLeft = this.getDaysLeft.bind(this);
+    this.state = { apiResponse: "" };
+  }
+  callAPI(){
+    fetch("http://localhost:3000/testBackend")
+      .then(res => res.text())
+      .then(res => this.setState({ apiResponse: res}));
+  }
+  componentWillMount(){
+    this.callAPI();
   }
   renderTrips(trip){
     console.log(`Dashboard component - renderTrips function`);
@@ -37,6 +46,7 @@ class Dashboard extends Component{
     }
     return(
       <div>
+        <p>{this.state.apiResponse}</p>
         <h1>Trips Dashboard</h1>
         {
           tripsPlanned ? this.props.trips.map(trip => (this.renderTrips(trip))) : "No Trips Planned"
