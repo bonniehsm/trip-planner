@@ -63,10 +63,16 @@ class TripToDos extends Component{
     super(props);
     this.state = {
       addTaskFormVisibility: false,
+      tasks: []
     }
     this.addToDo = this.addToDo.bind(this);
     this.deleteTaskHandler = this.deleteTaskHandler.bind(this);
     this.changeTaskFormVisibility = this.changeTaskFormVisibility.bind(this);
+  }
+  componentDidMount(){
+    fetch('http://localhost:3001/tasks')
+      .then(res => res.json())
+      .then(tasks => this.setState({tasks}))
   }
   addToDo(e){
     e.preventDefault();
@@ -97,7 +103,7 @@ class TripToDos extends Component{
       ${this.props.toDos}
       `
     );
-    //console.log(this.state);
+    console.log(this.state.tasks);
     let tasksAvailable = true;
     if(this.props.toDos == undefined || this.props.toDos.length == 0){
       console.log(`toDos object is UNDEFINED or has LENGTH == 0`)

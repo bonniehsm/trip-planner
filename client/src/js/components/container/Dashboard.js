@@ -10,7 +10,7 @@ class Dashboard extends Component{
     this.state = { apiResponse: "" };
   }
   callAPI(){
-    fetch("http://localhost:3000/testBackend")
+    fetch("http://localhost:3001/testBackend")
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res}));
   }
