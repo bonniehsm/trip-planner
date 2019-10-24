@@ -4,10 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var tasksRouter = require('./routes/tasks');
 var testBackendRouter = require('./routes/testBackend');
+
+//set up database connection
+let dbConnectionString = 'mongodb+srv://<username>:<password>@cluster0-xfa8b.mongodb.net/test?retryWrites=true&w=majority'
+//connect backend code with the database
+mongoose.connect(dbConnectionString, { useNewUrlParser: true});
+let db = mongoose.connection;
+db.once('open', ()=>console.log(`Connected to the database`));
+db.on('error', ()=>console.error.bind(console, 'MongoDb connection error'));
 
 var app = express();
 
