@@ -1,4 +1,4 @@
-console.log(process.env.NODE_ENV);
+require('dotenv').config();
 
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PW;
