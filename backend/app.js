@@ -1,8 +1,8 @@
+/**
+* Module Dependencies
+*/
+
 require('dotenv').config();
-
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PW;
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -17,6 +17,9 @@ var tasksRouter = require('./routes/tasks');
 var testBackendRouter = require('./routes/testBackend');
 
 //open connection to the database
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PW;
+
 let dbConnectionString = 'mongodb+srv://' + dbUser + ':' + dbPassword + '@cluster0-xfa8b.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(dbConnectionString, {
   useNewUrlParser: true,
@@ -27,18 +30,6 @@ let db = mongoose.connection;
 //connection status notifications
 db.once('open', ()=>console.log(`Connected to the database`));
 db.on('error', ()=>console.error.bind(console, 'MongoDb connection error'));
-
-//create schema
-var taskSchema = mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
-  name: String,
-  done: Boolean,
-  dueDate: {type: Date, default: Date.now },
-  priority: Boolean
-});
-
-//compile schema into a model
-var Task = mongoose.model('Task', taskSchema);
 
 var app = express();
 

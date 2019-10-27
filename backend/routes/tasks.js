@@ -1,18 +1,22 @@
+/**
+* Module Dependencies
+*/
+
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+var Task = require('./../models/task');
+
+
+/**
+* Model CRUD operations
+*/
+
 router.get('/', (req, res) => {
-  //res.send('respond with a resource');
-  res.json([
-    {
-      id: "yourObjectId",
-      taskName: "task from backend api",
-      done: false,
-      dueDate: new Date().toString(),
-      priority: false
-    }
-  ]);
+  Task.find((err, task) => {
+    if(err) return res.json({ success: false, error: err });
+    return res.json({ success: true, task: task });
+  })
 });
 
 router.post('/createTask', (req, res) => {
