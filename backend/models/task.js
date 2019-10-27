@@ -14,7 +14,7 @@ const taskSchema = new Schema({
   id: Schema.Types.ObjectId,
   name: String,
   done: Boolean,
-  dueate: {type: Date, default: Date.now },
+  dueDate: {type: Date, default: Date.now },
   priority: Boolean
 });
 
