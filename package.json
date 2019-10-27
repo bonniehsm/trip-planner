@@ -11,4 +11,8 @@
   },
   "keywords": [],
   "author": "",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "redux-logger": "^3.0.6"
+  }
 }

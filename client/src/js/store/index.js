@@ -5,9 +5,9 @@ import { composeWithDevTools } from "redux-devtools-extension/logOnlyInProductio
 import rootReducer from "../reducers/index";
 
 const middlewares = [thunk, logger];
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middlewares))
+
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(...middlewares))
 );
 
 export default store;
