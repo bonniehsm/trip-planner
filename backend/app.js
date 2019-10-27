@@ -11,21 +11,33 @@ var logger = require('morgan');
 var cors = require("cors");
 var mongoose = require('mongoose');
 
-
+//routes
 var indexRouter = require('./routes/index');
 var tasksRouter = require('./routes/tasks');
 var testBackendRouter = require('./routes/testBackend');
 
-//set up connection to mongoDb cluster
+//open connection to the database
 let dbConnectionString = 'mongodb+srv://' + dbUser + ':' + dbPassword + '@cluster0-xfa8b.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(dbConnectionString, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-
+  useUnifiedTopology: true
 });
 let db = mongoose.connection;
+
+//connection status notifications
 db.once('open', ()=>console.log(`Connected to the database`));
 db.on('error', ()=>console.error.bind(console, 'MongoDb connection error'));
+
+//create schema
+var taskSchema = mongoose.Schema({
+  name: String,
+  done: Boolean,
+  dueDate: String,
+  priority: Boolean
+});
+
+//compile schema into a model
+var Task = mongoose.model('Task', taskSchema);
 
 var app = express();
 
