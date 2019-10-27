@@ -30,9 +30,10 @@ db.on('error', ()=>console.error.bind(console, 'MongoDb connection error'));
 
 //create schema
 var taskSchema = mongoose.Schema({
+  id: mongoose.Schema.Types.ObjectId,
   name: String,
   done: Boolean,
-  dueDate: String,
+  dueDate: {type: Date, default: Date.now },
   priority: Boolean
 });
 
